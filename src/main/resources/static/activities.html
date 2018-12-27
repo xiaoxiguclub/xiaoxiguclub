@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>小戏骨俱乐部</title>
+    <meta name="keywords"
+          content="小戏骨俱乐部、小戏骨、释小松、周漾玥、钟宝儿、钟熠璠、郭飞歌、罗熙怡、陶冰蓝、钟奕儿、肖杨博涵、孙伊雯、刘戴恩、陈舒宜、韦梓彤、孙乐颜、翁馨、崔傲菲儿、艾梦欣、杨纳娜、周艺、姚奥依、高琳子">
+    <meta name="description"
+          content="《小戏骨》是2015年湖南广播电视台元老教父潘礼平及其金牌团队“潘礼平团队”推出少儿原创的品牌栏目。栏目在全国首创“小孩演大剧”，“演经典、学经典”的节目模式，所有演员都是3—14岁的少年儿童。">
+    <meta charset='utf-8'/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/zui.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/zui.min.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -60px; /*margin-bottom的负值等于footer高度*/
+        }
+
+        .push,
+        .foot {
+            height: 60px;
+            clear: both;
+        }
+
+        ul {
+            margin-top: auto;
+            position: relative;
+            left: 50%;
+            float: left;
+        }
+
+        ul li {
+            position: relative;
+            right: 50%;
+            float: left;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+            $(function () {
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 100) {
+                        $("#id_right_side").fadeIn(1500);
+                    } else {
+                        $("#id_right_side").fadeOut(1500);
+                    }
+                });
+
+                //当点击跳转链接后，回到页面顶部位置
+                $("#id_gotop").click(function () {
+                    //$('body,html').animate({scrollTop:0},1000);
+                    if ($('html').scrollTop()) {
+                        $('html').animate({scrollTop: 0}, 1000);
+                        return false;
+                    }
+                    $('body').animate({scrollTop: 0}, 1000);
+                    return false;
+                });
+            });
+
+            $.ajax({
+                url: '/activities/1',
+                type: 'get',
+                success: function (data) {
+                    var totalRows = data.activityTotal;
+                    var totalPages = totalRows % 10 > 0 ? parseInt(totalRows / 10) + 1 : totalRows / 10;
+                    var _activity = "";
+                    if (0 < totalRows) {
+                        $.each(data.activityList, function (index, obj) {
+                            _activity += "<div class='item'>";
+                            _activity += "<div class='item-heading'>";
+                            _activity += "<div class='pull-right'><span class='text-muted'>" + obj.date + "</span></div>";
+                            _activity += "<h4><a href='" + obj.source + "' target='_blank'>" + obj.title + "</a></h4>";
+                            _activity += "</div>";
+                            _activity += "</div>";
+                        })
+                        $("#showList").html(_activity);
+                        $("#activityTotal").html(data.activityTotal);
+
+                        $("#activityPager").pager({
+                            page: 1,
+                            recTotal: totalRows,
+                            recPerPage: 10,
+                            maxNavCount: totalPages > 10 ? 10 : totalPages,
+                            elements: [
+                                'first_icon',
+                                'prev_icon',
+                                'pages',
+                                'next_icon',
+                                'last_icon'
+                            ],
+                            onPageChange: function (state, oldState) {
+                                if (state.page !== oldState.page) {
+                                    $.ajax({
+                                        url: '/shows/' + state.page,
+                                        type: 'get',
+                                        success: function (data) {
+                                            if (null != data.activityList) {
+                                                var _activity = "";
+                                                $.each(data.activityList, function (index, obj) {
+                                                    _activity += "<div class='item'>";
+                                                    _activity += "<div class='item-heading'>";
+                                                    _activity += "<div class='pull-right'><span class='text-muted'>" + obj.date + "</span></div>";
+                                                    _activity += "<h4><a href='" + obj.source + "' target='_blank'>" + obj.title + "</a></h4>";
+                                                    _activity += "</div>";
+                                                    _activity += "</div>";
+                                                })
+                                                $("#showList").html(_activity);
+                                                $("#activityTotal").html(data.activityTotal);
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        });
+    </script>
+</head>
+<body class="_body">
+<!--顶部菜单-->
+<div class="top">
+    <div class="container">
+        <h1><a href="/"><img src="images/banner.png" alt="小戏骨俱乐部" height="59px"></a></h1>
+        <div class="top-menu">
+            <a href="/" class="menu-home"><span>首页</span></a>
+            <a href="activities" class="menu-activity"><span>动态</span></a>
+            <a href="works" class="menu-work"><span>作品</span></a>
+            <a href="stars" class="menu-star"><span>成员</span></a>
+            <a href="photos" class="menu-photo"><span>图片</span></a>
+            <a href="videos" class="menu-video"><span>视频</span></a>
+            <!--<a href="admin/login" class="menu-login"><span>登陆</span></a>-->
+            <a href="javaScript:if (window.confirm('暂未开放')){window.location.href='/'} "
+               class="menu-login"><span>登陆</span></a>
+        </div>
+    </div>
+</div>
+<div class="banner banner_news"></div>
+<div class="container" style="position: relative">
+    <div class="list">
+        <header>
+            <h3><i class="icon-list-ul"></i> 新闻动态
+                <small>更新 <span id="activityTotal"></span> 条</small>
+            </h3>
+        </header>
+        <div id="activities" class="items items-hover">
+
+        </div>
+    </div>
+</div>
+<ul id="activityPager" class="pager"></ul>
+<div class="foot_header"></div>
+<div class="foot">
+    <div class="foot-icon-container">
+        <a href="javascript:showWxWin()"><span><img src="images/foot_icon_wx.png"></span></a>
+        <a href="javascript:showWeiboWin()"><span><img src="images/foot_icon_wb.png"></span></a>
+        <a href="javascript:showEmailWin()"><span><img src="images/foot_icon_email.png"></span></a>
+    </div>
+    <div class="foot-right-container foot-right-menu">
+        <a href="about"><span>关于我们</span></a>
+        <span>|</span>
+        <a href="contact"><span>联系我们</span></a>
+        <span>|</span>
+        <a href="feedback"><span>建议反馈</span></a>
+    </div>
+    <div>
+        版权所有 ©2018 王明亮 冀ICP备17033992号 | <img src="images/jinghui.png" alt="冀公网安备"/>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13063102000041">冀公网安备13063102000041</a>
+    </div>
+</div>
+</body>
+</html>
+<div class="right-side" id="id_right_side">
+    <a href="#top" id="id_gotop" style="display: block;"><i class="icon icon-long-arrow-up"></i></a>
+</div>
+<!-- 对话框HTML -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content" id="id_modal_content">
+            <p class="coming-soon">Coming Soon...</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/foot.js"></script>
