@@ -173,8 +173,8 @@
                     from WORK
                     where DEFAULTDISPLAY != 0
                     order by DEFAULTDISPLAY asc) w
-              where ROWNUM &lt;= 8)
-        where rowno &gt;= 1
+              where ROWNUM &lt;= #{endIndex})
+        where rowno &gt;= #{startIndex}
     </select>
     <!--查询更多小戏骨作品-->
     <select id="selectWorks" resultMap="BaseResultMap">
@@ -183,8 +183,10 @@
               from (select *
                     from WORK
                     where DEFAULTDISPLAY = 0
-                    order by DEFAULTDISPLAY asc) w
-              where ROWNUM &lt;= 8)
-        where rowno &gt;= 1
+                    and STATUS = 1
+                    and ISXXGWORK = 1
+                    order by RELEASE_DATE desc) w
+              where ROWNUM &lt;= #{endIndex})
+        where rowno &gt;= #{startIndex}
     </select>
 </mapper>

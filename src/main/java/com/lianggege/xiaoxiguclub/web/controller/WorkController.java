@@ -32,6 +32,12 @@ public class WorkController {
         return "works";
     }
 
+    /**
+     * 分页查询小戏骨作品
+     *
+     * @param currentPage
+     * @return
+     */
     @RequestMapping("/works/{currentPage}")
     @ResponseBody
     public Object getWorksByPage(@PathVariable("currentPage") Integer currentPage) {
@@ -40,13 +46,14 @@ public class WorkController {
         if (currentPage == 1) {
             //查询默认显示的小戏骨作品
             paramMap.put("startIndex", (currentPage - 1) * 8 + 1);
+            paramMap.put("endIndex", currentPage * 8);
             works = workService.getDefaultDisplayWorks(paramMap);
         } else {
             //查询更多小戏骨作品
-            paramMap.put("startIndex", (currentPage - 2) * 8);
+            paramMap.put("startIndex", (currentPage - 2) * 8 + 1);
+            paramMap.put("endIndex", (currentPage - 1) * 8);
             works = workService.getWorks(paramMap);
         }
-        paramMap.put("endIndex", currentPage * 8);
         Map<String, Object> retMap = new ConcurrentHashMap<>(8);
         retMap.put("works", works);
         return retMap;

@@ -73,20 +73,20 @@
                 url: '/activities/1',
                 type: 'get',
                 success: function (data) {
-                    var totalRows = data.activityTotal;
+                    var totalRows = data.activitiesTotal;
                     var totalPages = totalRows % 10 > 0 ? parseInt(totalRows / 10) + 1 : totalRows / 10;
                     var _activity = "";
                     if (0 < totalRows) {
-                        $.each(data.activityList, function (index, obj) {
+                        $.each(data.activities, function (index, obj) {
                             _activity += "<div class='item'>";
                             _activity += "<div class='item-heading'>";
-                            _activity += "<div class='pull-right'><span class='text-muted'>" + obj.date + "</span></div>";
-                            _activity += "<h4><a href='" + obj.source + "' target='_blank'>" + obj.title + "</a></h4>";
+                            _activity += "<div class='pull-right'><span class='text-muted'>" + obj.activityDate + "</span></div>";
+                            _activity += "<h4><a href='" + obj.src + "' target='_blank'>" + obj.title + "</a></h4>";
                             _activity += "</div>";
                             _activity += "</div>";
                         })
-                        $("#showList").html(_activity);
-                        $("#activityTotal").html(data.activityTotal);
+                        $("#activities").html(_activity);
+                        $("#activitiesTotal").html(data.activitiesTotal);
 
                         $("#activityPager").pager({
                             page: 1,
@@ -103,21 +103,21 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/shows/' + state.page,
+                                        url: '/activities/' + state.page,
                                         type: 'get',
                                         success: function (data) {
-                                            if (null != data.activityList) {
+                                            if (null != data.activities) {
                                                 var _activity = "";
-                                                $.each(data.activityList, function (index, obj) {
+                                                $.each(data.activities, function (index, obj) {
                                                     _activity += "<div class='item'>";
                                                     _activity += "<div class='item-heading'>";
-                                                    _activity += "<div class='pull-right'><span class='text-muted'>" + obj.date + "</span></div>";
-                                                    _activity += "<h4><a href='" + obj.source + "' target='_blank'>" + obj.title + "</a></h4>";
+                                                    _activity += "<div class='pull-right'><span class='text-muted'>" + obj.activityDate + "</span></div>";
+                                                    _activity += "<h4><a href='" + obj.src + "' target='_blank'>" + obj.title + "</a></h4>";
                                                     _activity += "</div>";
                                                     _activity += "</div>";
                                                 })
-                                                $("#showList").html(_activity);
-                                                $("#activityTotal").html(data.activityTotal);
+                                                $("#activities").html(_activity);
+                                                $("#activitiesTotal").html(data.activitiesTotal);
                                             }
                                         }
                                     })
@@ -153,7 +153,7 @@
     <div class="list">
         <header>
             <h3><i class="icon-list-ul"></i> 新闻动态
-                <small>更新 <span id="activityTotal"></span> 条</small>
+                <small>更新 <span id="activitiesTotal"></span> 条</small>
             </h3>
         </header>
         <div id="activities" class="items items-hover">

@@ -40,14 +40,14 @@
                 type: 'get',
                 success: function (data) {
                     var _star = "";
-                    $.each(data.starList, function (index, obj) {
+                    $.each(data.stars, function (index, obj) {
                         _star += "<a href='/star/" + obj.id + "'><li class='col-xs-3'>";
                         _star += "<img src='" + obj.avatar + "' alt='" + obj.name + "' width='292px' height='410px'>";
                         _star += "<p class='lead'>" + obj.name + "</p>";
                         _star += "</li></a>";
                     });
-                    $("#starList").append(_star);
-                    if (data.starList.length < 8) {
+                    $("#stars").append(_star);
+                    if (data.stars.length < 8) {
                         $("#id_btn_more2").hide();
                         $("#noMore").show();
                     }
@@ -76,8 +76,8 @@
 </div>
 <!--小戏骨成员-->
 <div class="home-star-container" style="margin-top: 100px">
-    <ul id="starList">
-        <a href="star/699df5c443e741c2aa80a3e107fcacc6">
+    <ul id="stars">
+        <!--<a href="star/699df5c443e741c2aa80a3e107fcacc6">
             <li class="col-xs-3">
                 <img src="https://ae01.alicdn.com/kf/HTB1Enh1XyLrK1Rjy1zd761nnpXaI.png" alt="周漾玥" width="292px"
                      height="410px">
@@ -132,7 +132,7 @@
                      width="292px" height="410px">
                 <p class="lead">肖杨博涵</p>
             </li>
-        </a>
+        </a>-->
     </ul>
 </div>
 <div class="clearfix"></div>
@@ -150,14 +150,14 @@
             type: 'get',
             success: function (data) {
                 var _star = "";
-                $.each(data.starList, function (index, obj) {
+                $.each(data.stars, function (index, obj) {
                     _star += "<a href='/star/" + obj.id + "'><li class='col-xs-3'>";
                     _star += "<img src='" + obj.avatar + "' alt='" + obj.name + "' width='292px' height='410px'>";
                     _star += "<p class='lead'>" + obj.name + "</p>";
                     _star += "</li></a>";
                 });
-                $("#starList").append(_star);
-                if (data.starList.length < 8) {
+                $("#stars").append(_star);
+                if (data.stars.length < 8) {
                     $("#id_btn_more2").hide();
                     $("#noMore").show();
                 }
