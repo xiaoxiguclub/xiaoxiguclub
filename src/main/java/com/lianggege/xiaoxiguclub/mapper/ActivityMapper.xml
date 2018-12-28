@@ -145,4 +145,18 @@
         select COUNT(*)
         from ACTIVITY
     </select>
+    <!--根据小戏骨成员ID查询小戏骨动态-->
+    <select id="selectActivitiesBySid" resultMap="BaseResultMap">
+        select *
+        from (select a.*, ROWNUM as rowno
+              from (select *
+                    from activity
+                    where ID in
+                          (select AID
+                           from STAR_ACTIVITY_RELATION
+                           where SID = #{sid})
+                    order by ACTIVITY_DATE desc) a
+              where ROWNUM &lt;= #{endIndex})
+        where rowno &gt;= #{startIndex}
+    </select>
 </mapper>

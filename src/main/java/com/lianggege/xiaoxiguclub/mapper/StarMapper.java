@@ -69,4 +69,12 @@ public interface StarMapper {
      * @return
      */
     List<Star> selectStars(Map<String, Object> paramMap);
+
+    /**
+     * 根据ID查询小戏骨成员信息
+     *
+     * @param id
+     * @return
+     */
+    Star selectStarById(String id);
 }

@@ -41,7 +41,7 @@
                 success: function (data) {
                     var _work = "";
                     $.each(data.works, function (index, obj) {
-                        _work += "<a href='" + obj.src + "'><li class='col-xs-3'>";
+                        _work += "<a href='" + obj.src + "' target='_blank'><li class='col-xs-3'>";
                         _work += "<img src='" + obj.cover + "' alt='" + obj.title + "' width='292px' height='410px'>";
                         _work += "<p class='lead'>" + obj.title + "</p>";
                         _work += "</li></a>";
@@ -153,7 +153,7 @@
             success: function (data) {
                 var _work = "";
                 $.each(data.works, function (index, obj) {
-                    _work += "<a href='" + obj.src + "'><li class='col-xs-3'>";
+                    _work += "<a href='" + obj.src + "' target='_blank'><li class='col-xs-3'>";
                     _work += "<img src='" + obj.cover + "' alt='" + obj.title + "' width='292px' height='410px'>";
                     _work += "<p class='lead'>" + obj.title + "</p>";
                     _work += "</li></a>";

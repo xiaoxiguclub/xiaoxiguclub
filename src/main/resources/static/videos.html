@@ -40,14 +40,14 @@
                 type: 'get',
                 success: function (data) {
                     var _video = "";
-                    $.each(data.videoList, function (index, obj) {
+                    $.each(data.videos, function (index, obj) {
                         _video += "<li class='col-xs-6' style='text-align: center'>";
-                        _video += ""+obj.source+"";
-                        _video += "<p class='lead'>"+obj.title+"</p>";
+                        _video += "" + obj.src + "";
+                        _video += "<p class='lead'>" + obj.title + "</p>";
                         _video += "</li>";
                     });
-                    $("#videoList").append(_video);
-                    if (data.videoList.length < 8) {
+                    $("#videos").append(_video);
+                    if (data.videos.length < 10) {
                         $("#id_btn_more2").hide();
                         $("#noMore").show();
                     }
@@ -75,7 +75,7 @@
     </div>
 </div>
 <div class="home-star-container" style="margin-top: 100px">
-    <ul id="videoList"></ul>
+    <ul id="videos"></ul>
 </div>
 <div class="clearfix"></div>
 <a href="javascript:showMore();" id="id_btn_more2">
@@ -92,14 +92,14 @@
             type: 'get',
             success: function (data) {
                 var _video = "";
-                $.each(data.videoList, function (index, obj) {
+                $.each(data.videos, function (index, obj) {
                     _video += "<li class='col-xs-6' style='text-align: center'>";
-                    _video += ""+obj.source+"";
-                    _video += "<p class='lead'>"+obj.title+"</p>";
+                    _video += "" + obj.src + "";
+                    _video += "<p class='lead'>" + obj.title + "</p>";
                     _video += "</li>";
                 });
-                $("#videoList").append(_video);
-                if (data.videoList.length < 8) {
+                $("#videos").append(_video);
+                if (data.videos.length < 10) {
                     $("#id_btn_more2").hide();
                     $("#noMore").show();
                 }

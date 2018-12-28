@@ -9,6 +9,7 @@
     <meta charset='utf-8'/>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/zui.min.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
     <link type="text/css" rel="stylesheet" href="css/zui.min.css">
     <link type="text/css" rel="stylesheet" href="css/common.css">
     <style type="text/css">
@@ -80,8 +81,13 @@
                         $.each(data.activities, function (index, obj) {
                             _activity += "<div class='item'>";
                             _activity += "<div class='item-heading'>";
-                            _activity += "<div class='pull-right'><span class='text-muted'>" + obj.activityDate + "</span></div>";
-                            _activity += "<h4><a href='" + obj.src + "' target='_blank'>" + obj.title + "</a></h4>";
+                            _activity += "<div class='pull-right'><span class='text-muted'>" + moment(obj.activityDate).format("L") + "</span></div>";
+                            if (obj.src == null) {
+                                _activity += "<h4><a href='activities' target='_blank'>";
+                            } else {
+                                _activity += "<h4><a href='" + obj.src + "' target='_blank'>";
+                            }
+                            _activity += obj.title + "</a></h4>";
                             _activity += "</div>";
                             _activity += "</div>";
                         })
@@ -111,8 +117,13 @@
                                                 $.each(data.activities, function (index, obj) {
                                                     _activity += "<div class='item'>";
                                                     _activity += "<div class='item-heading'>";
-                                                    _activity += "<div class='pull-right'><span class='text-muted'>" + obj.activityDate + "</span></div>";
-                                                    _activity += "<h4><a href='" + obj.src + "' target='_blank'>" + obj.title + "</a></h4>";
+                                                    _activity += "<div class='pull-right'><span class='text-muted'>" + moment(obj.activityDate).format("L") + "</span></div>";
+                                                    if (obj.src == null) {
+                                                        _activity += "<h4><a href='activities' target='_blank'>";
+                                                    } else {
+                                                        _activity += "<h4><a href='" + obj.src + "' target='_blank'>";
+                                                    }
+                                                    _activity += obj.title + "</a></h4>";
                                                     _activity += "</div>";
                                                     _activity += "</div>";
                                                 })

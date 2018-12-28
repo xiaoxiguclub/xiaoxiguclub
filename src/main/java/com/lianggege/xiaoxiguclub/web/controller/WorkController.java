@@ -25,7 +25,7 @@ public class WorkController {
     /**
      * 跳转到小戏骨作品页面
      *
-     * @return
+     * @returna
      */
     @RequestMapping("/works")
     public String toWorks() {

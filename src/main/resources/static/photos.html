@@ -67,15 +67,15 @@
                 type: 'get',
                 success: function (data) {
                     var _photo = "";
-                    $.each(data.photoList, function (index, obj) {
-                        _photo += "<a href='" + obj.source + "'>";
+                    $.each(data.photos, function (index, obj) {
+                        _photo += "<a href='" + obj.src + "'>";
                         _photo += "<li class='col-xs-4'>";
                         _photo += "<img src='" + obj.src + "' alt='" + obj.title + "' style='width:100%;'/>";
                         _photo += "</li>";
                         _photo += "</a>";
                     });
                     $(".home-star-container ul").append(_photo);
-                    if (data.photoList.length < 20) {
+                    if (data.photos.length < 20) {
                         $("#id_btn_more").hide();
                         $("#noMore").show();
                     }
@@ -125,15 +125,15 @@
                 type: 'get',
                 success: function (data) {
                     var _photo = "";
-                    $.each(data.photoList, function (index, obj) {
-                        _photo += "<a href='" + obj.source + "'>";
+                    $.each(data.photos, function (index, obj) {
+                        _photo += "<a href='" + obj.src + "'>";
                         _photo += "<li class='col-xs-4'>";
                         _photo += "<img src='" + obj.src + "' alt='" + obj.title + "' style='width:100%;'/>";
                         _photo += "</li>";
                         _photo += "</a>";
                     });
                     $(".home-star-container ul").append(_photo);
-                    if (data.photoList.length < 20) {
+                    if (data.photos.length < 20) {
                         $("#id_btn_more").hide();
                         $("#noMore").show();
                     }

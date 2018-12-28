@@ -40,4 +40,15 @@ public class StarServiceImpl implements StarService {
     public List<Star> getStars(Map<String, Object> paramMap) {
         return starMapper.selectStars(paramMap);
     }
+
+    /**
+     * 根据ID查询小戏骨成员信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Star getStarById(String id) {
+        return starMapper.selectByPrimaryKey(id);
+    }
 }

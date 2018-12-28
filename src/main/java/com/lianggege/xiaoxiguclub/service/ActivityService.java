@@ -25,4 +25,12 @@ public interface ActivityService {
      * @return
      */
     Long getActivitiesTotal();
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨动态
+     *
+     * @param paramMap
+     * @return
+     */
+    List<Activity> getActivitiesBySid(Map<String, Object> paramMap);
 }

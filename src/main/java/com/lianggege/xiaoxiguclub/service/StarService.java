@@ -26,4 +26,12 @@ public interface StarService {
      * @return
      */
     List<Star> getStars(Map<String, Object> paramMap);
+
+    /**
+     * 根据ID查询小戏骨成员信息
+     *
+     * @param id
+     * @return
+     */
+    Star getStarById(String id);
 }
