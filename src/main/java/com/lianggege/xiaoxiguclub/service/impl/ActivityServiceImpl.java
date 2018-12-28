@@ -50,4 +50,15 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> getActivitiesBySid(Map<String, Object> paramMap) {
         return activityMapper.selectActivitiesBySid(paramMap);
     }
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨动态数量
+     *
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public Long getActivitiesTotalBySid(Map<String, Object> paramMap) {
+        return activityMapper.selectActivitiesTotalBySid(paramMap);
+    }
 }

@@ -69,4 +69,20 @@ public interface WorkMapper {
      * @return
      */
     List<Work> selectWorks(Map<String, Object> paramMap);
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨作品
+     *
+     * @param paramMap
+     * @return
+     */
+    List<Work> selectWorksBySid(Map<String, Object> paramMap);
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨作品数量
+     *
+     * @param paramMap
+     * @return
+     */
+    Long selectWorksTotalBySid(Map<String, Object> paramMap);
 }

@@ -7,11 +7,12 @@
     <meta name="description"
           content="《小戏骨》是2015年湖南广播电视台元老教父潘礼平及其金牌团队“潘礼平团队”推出少儿原创的品牌栏目。栏目在全国首创“小孩演大剧”，“演经典、学经典”的节目模式，所有演员都是3—14岁的少年儿童。">
     <meta charset='utf-8'/>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/zui.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/zui.min.css">
-    <link type="text/css" rel="stylesheet" href="css/common.css">
-    <link type="text/css" rel="stylesheet" href="css/base.css">
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/zui.min.js"></script>
+    <script type="text/javascript" src="/js/moment.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/zui.min.css">
+    <link type="text/css" rel="stylesheet" href="/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
     <script type="text/javascript">
         $(function () {
             //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
@@ -34,10 +35,11 @@
                     $('body').animate({scrollTop: 0}, 1000);
                     return false;
                 });
+
             });
 
             $.ajax({
-                url: '/star/${id}/1',
+                url: '/star/' + window.location.href.substr(-32) + '/1',
                 type: 'get',
                 success: function (data) {
                     if (null != data.star.avatar) {
@@ -45,8 +47,8 @@
                     } else {
                         $("#avatar").html("<img src='images/avatar.png' width='100' height='100'/>");
                     }
-                    if (null != data.star.chineseName) {
-                        $(".name").html("<a href='" + data.star.weiboHomepage + "' target='_blank'>" + data.star.chineseName + "</a>");
+                    if (null != data.star.name) {
+                        $(".name").html("<a href='" + data.star.wbHomepage + "' target='_blank'>" + data.star.name + "</a>");
                     } else {
                         $(".name").html("姓名");
                     }
@@ -65,21 +67,21 @@
                     } else {
                         $("#constellation").html("暂无资料");
                     }
-                    if (0 < data.evaluationList.size) {
-                        $("#evaluation").html("<a title='" + data.evaluationList[0].commentator + "：" + data.evaluationList[0].evaluation + "' href='" + data.evaluationList[0].source + "' target='_blank'>" + data.evaluationList[0].commentator + "：" + data.evaluationList[0].evaluation + "</a>");
+                    if (0 < data.evaluations.length) {
+                        $("#evaluation").html("<a title='" + data.evaluations[0].evaluator + "：" + data.evaluations[0].evaluation + "' href='" + data.evaluations[0].src + "' target='_blank'>" + data.evaluations[0].evaluator + "：" + data.evaluations[0].evaluation + "</a>");
                     } else {
                         $("#evaluation").html("暂无资料");
                     }
 
-                    //处理行程分页插件
-                    var activityTotal = data.activityTotal; //总条数
-                    var activityPages = activityTotal % 5 > 0 ? parseInt(activityTotal / 5) + 1 : activityTotal / 5;
-                    if (0 < activityTotal) {
+                    //处理动态分页插件
+                    var activitiesTotal = data.activitiesTotal; //总条数
+                    var activitiesPages = activitiesTotal % 5 > 0 ? parseInt(activitiesTotal / 5) + 1 : activitiesTotal / 5;
+                    if (0 < activitiesTotal) {
                         $("#activityPager").pager({
                             page: 1,
-                            recTotal: activityTotal,
+                            recTotal: activitiesTotal,
                             recPerPage: 5,
-                            maxNavCount: activityPages > 5 ? 4 : activityPages,
+                            maxNavCount: activitiesPages > 5 ? 4 : activitiesPages,
                             elements: [
                                 'first_icon',
                                 'prev_icon',
@@ -90,31 +92,31 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/shows/${id}/' + state.page,
+                                        url: '/activities/' + window.location.href.substr(-32) + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
-                                            if (null != data.activityList) {
+                                            if (null != data.activities) {
                                                 var _activity = "";
                                                 _activity += "<dt>";
                                                 _activity += "<span class='number' style='text-align:center;'>序号</span>";
-                                                _activity += "<span class='money' style='text-align:center;'>行程</span>";
+                                                _activity += "<span class='money' style='text-align:center;'>动态</span>";
                                                 _activity += "<span class='profit' style='text-align:center;'>时间</span>";
                                                 _activity += "</dt>";
-                                                $.each(data.activityList, function (index, obj) {
+                                                $.each(data.activities, function (index, obj) {
                                                     _activity += "<dd>";
                                                     _activity += "<span class='number' style='text-align:center;'>" + ((state.page - 1) * 5 + index + 1) + "</span>";
                                                     _activity += "<span class='money' style='text-align:left;'>";
                                                     _activity += "<a title='" + obj.title + "' ";
-                                                    if (null != obj.source) {
-                                                        _activity += "href='" + obj.source + "' target='_blank'>";
+                                                    if (null != obj.src) {
+                                                        _activity += "href='" + obj.src + "' target='_blank'>";
                                                     } else {
                                                         _activity += "href='#' target='_self'>";
                                                     }
                                                     _activity += "" + obj.title + "";
                                                     _activity += "</a>";
                                                     _activity += "</span>";
-                                                    if (null != obj.date) {
-                                                        _activity += "<span class='profit' style='text-align:right;'>" + obj.date + "</span>";
+                                                    if (null != obj.activityDate) {
+                                                        _activity += "<span class='profit' style='text-align:right;'>" + moment(obj.activityDate).format("L") + "</span>";
                                                     } else {
                                                         _activity += "<span class='profit' style='text-align:right;'>暂无信息</span>";
                                                     }
@@ -128,18 +130,18 @@
                             }
                         });
                     } else {
-                        $("#ul_activity").html("<div style='position: absolute;left: 50%;top: 50%;margin: 30px 0 0 -28px'>暂无行程</div>");
+                        $("#ul_activity").html("<div style='position: absolute;left: 50%;top: 50%;margin: 30px 0 0 -28px'>暂无动态</div>");
                     }
 
                     //处理作品分页插件
-                    var workTotal = data.workTotal; //总条数
-                    var workPages = workTotal % 5 > 0 ? parseInt(workTotal / 5) + 1 : workTotal / 5;
-                    if (0 < workTotal) {
+                    var worksTotal = data.worksTotal; //总条数
+                    var worksPages = worksTotal % 5 > 0 ? parseInt(worksTotal / 5) + 1 : worksTotal / 5;
+                    if (0 < worksTotal) {
                         $("#workPager").pager({
                             page: 1,
-                            recTotal: workTotal,
+                            recTotal: worksTotal,
                             recPerPage: 5,
-                            maxNavCount: workPages > 5 ? 4 : workPages,
+                            maxNavCount: worksPages > 5 ? 4 : worksPages,
                             elements: [
                                 'first_icon',
                                 'prev_icon',
@@ -150,29 +152,30 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/works/${id}/' + state.page,
+                                        url: '/works/' + window.location.href.substr(-32) + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
-                                            if (null != data.workList) {
+                                            if (null != data.works) {
                                                 var _work = "";
                                                 _work += "<dt>";
                                                 _work += "<span class='number' style='text-align:center;'>序号</span>";
                                                 _work += "<span class='money' style='text-align:center;'>作品</span>";
                                                 _work += "<span class='profit' style='text-align:center;'>时间</span>";
                                                 _work += "</dt>";
-                                                $.each(data.workList, function (index, obj) {
+                                                $.each(data.works, function (index, obj) {
                                                     _work += "<dd>";
                                                     _work += "<span class='number' style='text-align:center;'>" + ((state.page - 1) * 5 + index + 1) + "</span>";
                                                     _work += "<span class='money' style='text-align:left;'>";
-                                                    _work += "<a title='《" + obj.title + "》 饰演 " + obj.role + "' ";
-                                                    if (null != obj.source) {
-                                                        _work += "href='" + obj.source + "' target='_blank'>" + obj.title + "</a>";
+                                                    _work += "<a title='《" + obj.title + "》' ";
+                                                    // _work += "<a title='《" + obj.title + "》 饰演 " + obj.role + "' ";
+                                                    if (null != obj.src) {
+                                                        _work += "href='" + obj.src + "' target='_blank'>" + obj.title + "</a>";
                                                     } else {
                                                         _work += "href='#' target='_self'>" + obj.title + "</a>";
                                                     }
                                                     _work += "</span>";
                                                     if (null != obj.releaseDate) {
-                                                        _work += "<span class='profit' style='text-align:right;'>" + obj.releaseDate + "</span>";
+                                                        _work += "<span class='profit' style='text-align:right;'>" + moment(obj.releaseDate).format("L") + "</span>";
                                                     } else {
                                                         _work += "<span class='profit' style='text-align:right;'>暂未上映</span>";
                                                     }
@@ -190,14 +193,14 @@
                     }
 
                     //处理获奖记录分页插件
-                    var awardRecordTotal = data.awardRecordTotal; //总条数
-                    var awardRecordPages = awardRecordTotal % 5 > 0 ? parseInt(awardRecordTotal / 5) + 1 : awardRecordTotal / 5;
-                    if (0 < awardRecordTotal) {
+                    var awardrecordsTotal = data.awardrecordsTotal; //总条数
+                    var awardrecordsPages = awardrecordsTotal % 5 > 0 ? parseInt(awardrecordsTotal / 5) + 1 : awardrecordsTotal / 5;
+                    if (0 < awardrecordsTotal) {
                         $("#awardRecordPager").pager({
                             page: 1,
-                            recTotal: awardRecordTotal,
+                            recTotal: awardrecordsTotal,
                             recPerPage: 5,
-                            maxNavCount: awardRecordPages > 5 ? 4 : awardRecordPages,
+                            maxNavCount: awardrecordsPages > 5 ? 4 : awardrecordsPages,
                             elements: [
                                 'first_icon',
                                 'prev_icon',
@@ -208,23 +211,23 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/awardRecords/${id}/' + state.page,
+                                        url: '/awardrecords/' + window.location.href.substr(-32) + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
-                                            if (null != data.awardRecordList) {
+                                            if (null != data.awardrecords) {
                                                 var _awardRecord = "";
                                                 _awardRecord += "<dt>";
                                                 _awardRecord += "<span class='number' style='text-align:center;'>序号</span>";
                                                 _awardRecord += "<span class='money' style='text-align:center;'>获奖记录</span>";
                                                 _awardRecord += "<span class='profit' style='text-align:center;'>时间</span>";
                                                 _awardRecord += "</dt>";
-                                                $.each(data.awardRecordList, function (index, obj) {
+                                                $.each(data.awardrecords, function (index, obj) {
                                                     _awardRecord += "<dd>";
                                                     _awardRecord += "<span class='number' style='text-align:center;'>" + ((state.page - 1) * 5 + index + 1) + "</span>";
                                                     _awardRecord += "<span class='money' style='text-align:left;'>";
                                                     _awardRecord += "<a title='" + obj.activity + " " + obj.award + "'";
-                                                    if (null != obj.source) {
-                                                        _awardRecord += "href='" + obj.source + "' target='_blank'>";
+                                                    if (null != obj.src) {
+                                                        _awardRecord += "href='" + obj.src + "' target='_blank'>";
                                                     } else {
                                                         _awardRecord += "href='#' target='_self'>";
                                                     }
@@ -232,7 +235,7 @@
                                                     _awardRecord += "</a>";
                                                     _awardRecord += "</span>";
                                                     _awardRecord += "<span class='profit'";
-                                                    _awardRecord += "style='text-align:right;'>" + obj.date + "</span>";
+                                                    _awardRecord += "style='text-align:right;'>" + moment(obj.awardDate).format("L") + "</span>";
                                                     _awardRecord += "</dd>";
                                                 })
                                                 $("#ul_awardRecord").html(_awardRecord);
@@ -254,14 +257,14 @@
 <!--顶部菜单-->
 <div class="top">
     <div class="container">
-        <h1><a href="/"><img src="images/banner.png" alt="小戏骨俱乐部" height="59px"></a></h1>
+        <h1><a href="/"><img src="/images/banner.png" alt="小戏骨俱乐部" height="59px"></a></h1>
         <div class="top-menu">
             <a href="/" class="menu-home"><span>首页</span></a>
-            <a href="activities" class="menu-activity"><span>动态</span></a>
-            <a href="works" class="menu-work"><span>作品</span></a>
-            <a href="stars" class="menu-star"><span>成员</span></a>
-            <a href="photos" class="menu-photo"><span>图片</span></a>
-            <a href="videos" class="menu-video"><span>视频</span></a>
+            <a href="/activities" class="menu-activity"><span>动态</span></a>
+            <a href="/works" class="menu-work"><span>作品</span></a>
+            <a href="/stars" class="menu-star"><span>成员</span></a>
+            <a href="/photos" class="menu-photo"><span>图片</span></a>
+            <a href="/videos" class="menu-video"><span>视频</span></a>
             <!--<a href="admin/login" class="menu-login"><span>登陆</span></a>-->
             <a href="javaScript:if (window.confirm('暂未开放')){window.location.href='/'} "
                class="menu-login"><span>登陆</span></a>
@@ -270,7 +273,7 @@
 </div>
 <div class="home-star-container" style="margin-top: 75px">
     <div class="homeWap">
-        <!--账户信息start-->
+        <!--个人信息start-->
         <div class="credenMain clearfix">
             <div class="dog-ear"></div>
             <div class="credenBasic">
@@ -307,13 +310,13 @@
                 </table>
             </div>
         </div>
-        <!--账户信息end-->
+        <!--个人信息end-->
 
-        <!--最新操作数据start-->
+        <!--动态、作品、获奖记录start-->
         <div class="allInvest clearfix">
 
             <div class="eachInvest" style="position: relative">
-                <h3>最近行程</h3>
+                <h3>最新动态</h3>
                 <div class="invest-tab-box">
                     <dl id="ul_activity">
 
@@ -348,16 +351,16 @@
                 </div>
             </div>
         </div>
-        <!--最新操作数据end-->
+        <!--行程、作品、获奖记录end-->
     </div>
 </div>
 
 <div class="foot_header"></div>
 <div class="foot">
     <div class="foot-icon-container">
-        <a href="javascript:showWxWin()"><span><img src="images/foot_icon_wx.png"></span></a>
-        <a href="javascript:showWeiboWin()"><span><img src="images/foot_icon_wb.png"></span></a>
-        <a href="javascript:showEmailWin()"><span><img src="images/foot_icon_email.png"></span></a>
+        <a href="javascript:showWxWin()"><span><img src="/images/foot_icon_wx.png"></span></a>
+        <a href="javascript:showWeiboWin()"><span><img src="/images/foot_icon_wb.png"></span></a>
+        <a href="javascript:showEmailWin()"><span><img src="/images/foot_icon_email.png"></span></a>
     </div>
     <div class="foot-right-container foot-right-menu">
         <a href="about"><span>关于我们</span></a>
@@ -367,7 +370,7 @@
         <a href="feedback"><span>建议反馈</span></a>
     </div>
     <div>
-        版权所有 ©2018 王明亮 冀ICP备17033992号 | <img src="images/jinghui.png" alt="冀公网安备"/>
+        版权所有 ©2018 王明亮 冀ICP备17033992号 | <img src="/images/jinghui.png" alt="冀公网安备"/>
         <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13063102000041">冀公网安备13063102000041</a>
     </div>
 </div>
@@ -384,4 +387,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="js/foot.js"></script>
+<script type="text/javascript" src="/js/foot.js"></script>

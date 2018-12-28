@@ -189,4 +189,24 @@
               where ROWNUM &lt;= #{endIndex})
         where rowno &gt;= #{startIndex}
     </select>
+    <!--根据小戏骨成员ID查询小戏骨作品-->
+    <select id="selectWorksBySid" resultMap="BaseResultMap">
+        select *
+        from (select w.*, ROWNUM as rowno
+              from (select *
+                    from WORK
+                    where ID in
+                       (select WID
+                        from STAR_WORK_RELATION
+                        where SID = #{sid})
+                    order by RELEASE_DATE desc) w
+              where ROWNUM &lt;= #{endIndex})
+        where rowno &gt;= #{startIndex}
+    </select>
+    <!--根据小戏骨成员ID查询小戏骨作品数量-->
+    <select id="selectWorksTotalBySid" resultType="java.lang.Long">
+        select COUNT(*)
+        from STAR_WORK_RELATION
+        where SID = #{sid}
+    </select>
 </mapper>

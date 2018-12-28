@@ -40,4 +40,26 @@ public class WorkServiceImpl implements WorkService {
     public List<Work> getWorks(Map<String, Object> paramMap) {
         return workMapper.selectWorks(paramMap);
     }
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨作品
+     *
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public List<Work> getWorksBySid(Map<String, Object> paramMap) {
+        return workMapper.selectWorksBySid(paramMap);
+    }
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨作品数量
+     *
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public Long getWorksTotalBySid(Map<String, Object> paramMap) {
+        return workMapper.selectWorksTotalBySid(paramMap);
+    }
 }

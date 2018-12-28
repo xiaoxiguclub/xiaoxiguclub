@@ -159,4 +159,10 @@
               where ROWNUM &lt;= #{endIndex})
         where rowno &gt;= #{startIndex}
     </select>
+    <!--根据小戏骨成员ID查询小戏骨动态数量-->
+    <select id="selectActivitiesTotalBySid" resultType="java.lang.Long">
+        select COUNT(*)
+        from STAR_ACTIVITY_RELATION
+        where SID = #{sid}
+    </select>
 </mapper>

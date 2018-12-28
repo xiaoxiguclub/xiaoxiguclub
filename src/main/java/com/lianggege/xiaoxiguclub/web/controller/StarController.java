@@ -115,7 +115,7 @@ public class StarController {
         Long worksTotal = workService.getWorksTotalBySid(paramMap);
 
         //根据小戏骨成员ID查询小戏骨获奖记录
-        List<Awardrecord> awardRecords = awardrecordService.getAwardRecordBySid(paramMap);
+        List<Awardrecord> awardRecords = awardrecordService.getAwardrecordsBySid(paramMap);
         //根据小戏骨成员ID查询小戏骨获奖记录数量
         Long awardrecordsTotal = awardrecordService.getAwardrecordsTotalBySid(paramMap);
 

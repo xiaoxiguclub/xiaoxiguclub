@@ -76,4 +76,12 @@ public interface ActivityMapper {
      * @return
      */
     List<Activity> selectActivitiesBySid(Map<String, Object> paramMap);
+
+    /**
+     * 根据小戏骨成员ID查询小戏骨动态数量
+     *
+     * @param paramMap
+     * @return
+     */
+    Long selectActivitiesTotalBySid(Map<String, Object> paramMap);
 }

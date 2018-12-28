@@ -51,4 +51,27 @@ public class ActivityController {
         retMap.put("activitiesTotal", activitiesTotal);
         return retMap;
     }
+
+    /**
+     * 分页查询小戏骨个人动态
+     *
+     * @param id
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/activities/{id}/{currentPage}")
+    @ResponseBody
+    public Object getActivitiesBySId(@PathVariable("id") String id, @PathVariable("currentPage") Integer currentPage) {
+        Map<String, Object> paramMap = new ConcurrentHashMap<>(3);
+        paramMap.put("sid", id);
+        paramMap.put("startIndex", (currentPage - 1) * 5 + 1);
+        paramMap.put("endIndex", currentPage * 5);
+        List<Activity> activities = activityService.getActivitiesBySid(paramMap);
+        Long activitiesTotal = activityService.getActivitiesTotalBySid(paramMap);
+        Map<String, Object> retMap = new ConcurrentHashMap<>(2);
+        retMap.put("activities", activities);
+        retMap.put("activitiesTotal", activitiesTotal);
+        return retMap;
+    }
+
 }

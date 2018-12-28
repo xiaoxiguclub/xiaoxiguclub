@@ -58,4 +58,26 @@ public class WorkController {
         retMap.put("works", works);
         return retMap;
     }
+
+    /**
+     * 分页查询小戏骨个人作品
+     *
+     * @param id
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/works/{id}/{currentPage}")
+    @ResponseBody
+    public Object getWorksBySid(@PathVariable("id") String id, @PathVariable("currentPage") Integer currentPage) {
+        Map<String, Object> paramMap = new ConcurrentHashMap<>(3);
+        paramMap.put("sid", id);
+        paramMap.put("startIndex", (currentPage - 1) * 5 + 1);
+        paramMap.put("endIndex", currentPage * 5);
+        List<Work> works = workService.getWorksBySid(paramMap);
+        Long worksTotal = workService.getWorksTotalBySid(paramMap);
+        Map<String, Object> retMap = new ConcurrentHashMap<>();
+        retMap.put("works", works);
+        retMap.put("worksTotal", worksTotal);
+        return retMap;
+    }
 }
