@@ -37,9 +37,9 @@
                 });
 
             });
-
+            var id = window.location.href.substr(-32);
             $.ajax({
-                url: '/star/' + window.location.href.substr(-32) + '/1',
+                url: '/star/' + id + '/1',
                 type: 'get',
                 success: function (data) {
                     if (null != data.star.avatar) {
@@ -92,7 +92,7 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/activities/' + window.location.href.substr(-32) + '/' + state.page,
+                                        url: '/activities/' + id + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
                                             if (null != data.activities) {
@@ -152,7 +152,7 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/works/' + window.location.href.substr(-32) + '/' + state.page,
+                                        url: '/works/' + id + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
                                             if (null != data.works) {
@@ -211,7 +211,7 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/awardrecords/' + window.location.href.substr(-32) + '/' + state.page,
+                                        url: '/awardrecords/' + id + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
                                             if (null != data.awardrecords) {
