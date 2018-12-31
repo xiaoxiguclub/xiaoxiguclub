@@ -1,7 +1,5 @@
 package com.lianggege.xiaoxiguclub.service.impl;
 
-import com.lianggege.xiaoxiguclub.mapper.EvaluationMapper;
-import com.lianggege.xiaoxiguclub.model.Evaluation;
 import com.lianggege.xiaoxiguclub.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

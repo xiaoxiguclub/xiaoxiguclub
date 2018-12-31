@@ -1,7 +1,5 @@
 package com.lianggege.xiaoxiguclub.service.impl;
 
-import com.lianggege.xiaoxiguclub.mapper.VideoMapper;
-import com.lianggege.xiaoxiguclub.model.Video;
 import com.lianggege.xiaoxiguclub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

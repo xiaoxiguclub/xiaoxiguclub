@@ -1,7 +1,5 @@
 package com.lianggege.xiaoxiguclub.service.impl;
 
-import com.lianggege.xiaoxiguclub.mapper.WorkMapper;
-import com.lianggege.xiaoxiguclub.model.Work;
 import com.lianggege.xiaoxiguclub.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

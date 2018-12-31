@@ -1,7 +1,5 @@
 package com.lianggege.xiaoxiguclub.service;
 
-import com.lianggege.xiaoxiguclub.model.Video;
-
 import java.util.List;
 import java.util.Map;
 

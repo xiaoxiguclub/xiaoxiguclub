@@ -1,6 +1,5 @@
 package com.lianggege.xiaoxiguclub.web.controller;
 
-import com.lianggege.xiaoxiguclub.model.Awardrecord;
 import com.lianggege.xiaoxiguclub.service.AwardrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

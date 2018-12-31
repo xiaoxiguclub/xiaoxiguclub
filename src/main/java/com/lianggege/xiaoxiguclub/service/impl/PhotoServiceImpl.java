@@ -1,7 +1,5 @@
 package com.lianggege.xiaoxiguclub.service.impl;
 
-import com.lianggege.xiaoxiguclub.mapper.PhotoMapper;
-import com.lianggege.xiaoxiguclub.model.Photo;
 import com.lianggege.xiaoxiguclub.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
