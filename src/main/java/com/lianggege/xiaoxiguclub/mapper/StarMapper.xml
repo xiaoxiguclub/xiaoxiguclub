@@ -220,7 +220,7 @@
         from (select s.*, ROWNUM rowno
               from (select *
                     from STAR
-                    where DEFAULTDISPLAY != 0
+                    where DEFAULTDISPLAY != 0 and DEFAULTDISPLAY is not null
                     order by DEFAULTDISPLAY asc) s
               where ROWNUM &lt;= #{endIndex})
         where rowno &gt;= #{startIndex}
@@ -231,7 +231,7 @@
         from (select s.*, ROWNUM rowno
               from (select *
                     from STAR
-                    where DEFAULTDISPLAY = 0) s
+                    where DEFAULTDISPLAY is NULL or DEFAULTDISPLAY = 0) s
               where ROWNUM &lt;= #{endIndex})
         where rowno &gt;= #{startIndex}
     </select>

@@ -119,4 +119,8 @@
         SRC = #{src,jdbcType=VARCHAR}
         where ID = #{id,jdbcType=VARCHAR}
     </update>
+    <!--根据小戏骨作品ID查询小戏骨作品剧集信息-->
+    <select id="selectEpisodesByWid" resultMap="BaseResultMap">
+        select
+    </select>
 </mapper>

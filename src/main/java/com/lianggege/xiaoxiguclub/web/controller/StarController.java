@@ -30,7 +30,7 @@ public class StarController {
     private WorkService workService;
 
     @Autowired
-    private AwardrecordService awardrecordService;
+    private AwardRecordService awardrecordService;
 
     @Autowired
     private EvaluationService evaluationService;
@@ -115,9 +115,9 @@ public class StarController {
         Long worksTotal = workService.getWorksTotalBySid(paramMap);
 
         //根据小戏骨成员ID查询小戏骨获奖记录
-        List<Awardrecord> awardrecords = awardrecordService.getAwardrecordsBySid(paramMap);
+        List<AwardRecord> awardRecords = awardrecordService.getAwardRecordsBySid(paramMap);
         //根据小戏骨成员ID查询小戏骨获奖记录数量
-        Long awardrecordsTotal = awardrecordService.getAwardrecordsTotalBySid(paramMap);
+        Long awardRecordsTotal = awardrecordService.getAwardRecordsTotalBySid(paramMap);
 
         //根据小戏骨成员ID查询小戏骨人物评价
         List<Evaluation> evaluations = evaluationService.getEvaluationsBySid(paramMap);
@@ -128,8 +128,8 @@ public class StarController {
         retMap.put("activitiesTotal", activitiesTotal);
         retMap.put("works", works);
         retMap.put("worksTotal", worksTotal);
-        retMap.put("awardrecords", awardrecords);
-        retMap.put("awardrecordsTotal", awardrecordsTotal);
+        retMap.put("awardRecords", awardRecords);
+        retMap.put("awardRecordsTotal", awardRecordsTotal);
         retMap.put("evaluations", evaluations);
 
         return retMap;

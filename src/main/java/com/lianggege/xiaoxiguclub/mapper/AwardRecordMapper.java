@@ -60,7 +60,7 @@ public interface AwardRecordMapper {
      * @param paramMap
      * @return
      */
-    List<AwardRecord> selectAwardrecordsBySid(Map<String, Object> paramMap);
+    List<AwardRecord> selectAwardRecordsBySid(Map<String, Object> paramMap);
 
     /**
      * 根据小戏骨成员ID查询小戏骨获奖记录数量
@@ -68,5 +68,5 @@ public interface AwardRecordMapper {
      * @param paramMap
      * @return
      */
-    Long selectAwardrecordsTotalBySid(Map<String, Object> paramMap);
+    Long selectAwardRecordsTotalBySid(Map<String, Object> paramMap);
 }

@@ -1,5 +1,6 @@
 package com.lianggege.xiaoxiguclub.web.controller;
 
+import com.lianggege.xiaoxiguclub.model.Photo;
 import com.lianggege.xiaoxiguclub.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

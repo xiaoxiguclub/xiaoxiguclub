@@ -184,7 +184,7 @@
         from (select w.*, ROWNUM rowno
               from (select *
                     from WORK
-                    where DEFAULTDISPLAY != 0
+                    where DEFAULTDISPLAY != 0 and DEFAULTDISPLAY is not null
                     order by DEFAULTDISPLAY asc) w
               where ROWNUM &lt;= #{endIndex})
         where rowno &gt;= #{startIndex}
@@ -195,7 +195,7 @@
         from (select w.*, ROWNUM rowno
               from (select *
                     from WORK
-                    where DEFAULTDISPLAY = 0
+                    where (DEFAULTDISPLAY is NULL or DEFAULTDISPLAY = 0)
                     and STATUS = 1
                     and ISXXGWORK = 1
                     order by RELEASE_DATE desc) w

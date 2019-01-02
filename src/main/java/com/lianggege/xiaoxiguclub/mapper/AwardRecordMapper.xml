@@ -142,7 +142,7 @@
         where ID = #{id,jdbcType=VARCHAR}
     </update>
     <!--根据小戏骨成员ID查询小戏骨获奖记录-->
-    <select id="selectAwardrecordsBySid" resultMap="BaseResultMap">
+    <select id="selectAwardRecordsBySid" resultMap="BaseResultMap">
         select *
         from (select r.*, ROWNUM as rowno
               from (select *
@@ -156,7 +156,7 @@
         where rowno &gt;= #{startIndex}
     </select>
     <!--根据小戏骨成员ID查询小戏骨获奖记录数量-->
-    <select id="selectAwardrecordsTotalBySid" resultType="java.lang.Long">
+    <select id="selectAwardRecordsTotalBySid" resultType="java.lang.Long">
         select COUNT(*)
         from STAR_AWARDRECORD_RELATION
         where SID = #{sid}

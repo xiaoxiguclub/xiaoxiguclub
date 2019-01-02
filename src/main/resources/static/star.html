@@ -193,14 +193,14 @@
                     }
 
                     //处理获奖记录分页插件
-                    var awardrecordsTotal = data.awardrecordsTotal; //总条数
-                    var awardrecordsPages = awardrecordsTotal % 5 > 0 ? parseInt(awardrecordsTotal / 5) + 1 : awardrecordsTotal / 5;
-                    if (0 < awardrecordsTotal) {
+                    var awardRecordsTotal = data.awardRecordsTotal; //总条数
+                    var awardRecordsPages = awardRecordsTotal % 5 > 0 ? parseInt(awardRecordsTotal / 5) + 1 : awardRecordsTotal / 5;
+                    if (0 < awardRecordsTotal) {
                         $("#awardRecordPager").pager({
                             page: 1,
-                            recTotal: awardrecordsTotal,
+                            recTotal: awardRecordsTotal,
                             recPerPage: 5,
-                            maxNavCount: awardrecordsPages > 5 ? 4 : awardrecordsPages,
+                            maxNavCount: awardRecordsPages > 5 ? 4 : awardRecordsPages,
                             elements: [
                                 'first_icon',
                                 'prev_icon',
@@ -211,17 +211,17 @@
                             onPageChange: function (state, oldState) {
                                 if (state.page !== oldState.page) {
                                     $.ajax({
-                                        url: '/awardrecords/' + id + '/' + state.page,
+                                        url: '/awardRecords/' + id + '/' + state.page,
                                         type: 'get',
                                         success: function (data) {
-                                            if (null != data.awardrecords) {
+                                            if (null != data.awardRecords) {
                                                 var _awardRecord = "";
                                                 _awardRecord += "<dt>";
                                                 _awardRecord += "<span class='number' style='text-align:center;'>序号</span>";
                                                 _awardRecord += "<span class='money' style='text-align:center;'>获奖记录</span>";
                                                 _awardRecord += "<span class='profit' style='text-align:center;'>时间</span>";
                                                 _awardRecord += "</dt>";
-                                                $.each(data.awardrecords, function (index, obj) {
+                                                $.each(data.awardRecords, function (index, obj) {
                                                     _awardRecord += "<dd>";
                                                     _awardRecord += "<span class='number' style='text-align:center;'>" + ((state.page - 1) * 5 + index + 1) + "</span>";
                                                     _awardRecord += "<span class='money' style='text-align:left;'>";
