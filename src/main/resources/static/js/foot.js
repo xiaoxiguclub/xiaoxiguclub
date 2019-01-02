@@ -1,5 +1,5 @@
 function showWeiboWin() {
-    window.open('https://weibo.com/2835230221','newwindow');
+    window.open('https://weibo.com/2835230221', 'newwindow');
 }
 
 function showEmailWin() {
@@ -11,8 +11,7 @@ function showEmailWin() {
 }
 
 function showWxWin() {
-    // $('#id_modal_content').html('<div style="padding:20px; text-align:center;"><p class="lead" style="margin:30px;">请扫这里</p><img src="/images/qrcode_xiaoxiguclub_wx.jpg"><img src="/images/contact_wx_app.jpg">');
-    $('#id_modal_content').html('<table style="text-align: center;padding:20px;margin: auto"><tr><td colspan="2">请扫这里</td></tr><tr><td><img src="images/qrcode_xiaoxiguclub_wx.jpg"></td><td><img src="images/contact_wx_app.jpg"></td></tr><tr><td>微信公众号</td><td>微信小程序</td></tr></table>');
+    $('#id_modal_content').html('<table style="text-align: center;padding:20px;margin: auto"><tr><td colspan="2">请扫这里</td></tr><tr><td><img src="https://www.superbed.cn/pic/5c2cb0a39dc6d672c31eda99"></td><td><img src="https://www.superbed.cn/pic/5c2ca1119dc6d672c31eda94"></td></tr><tr><td>微信公众号</td><td>微信小程序</td></tr></table>');
     $('#myModal').modal();
 }
 
@@ -22,7 +21,6 @@ function goToTop() {
         if (document.body.scrollTop == 0) {
             clearInterval(timer);
         }
-        ;
     }, 8);
 }
 
@@ -32,7 +30,7 @@ function initCurMenu() {
         $(".menu-activity").addClass("current");
         return;
     }
-    if (_location.indexOf("/stars") != -1) {
+    if (_location.indexOf("/star") != -1) {
         $(".menu-star").addClass("current");
         return;
     }

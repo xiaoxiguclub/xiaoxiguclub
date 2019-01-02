@@ -33,6 +33,34 @@
                     return false;
                 });
             });
+            $.ajax({
+                url: '/list',
+                type: 'get',
+                success: function (data) {
+                    var _work = "";
+                    var _star = "";
+                    $.each(data.works, function (index, obj) {
+                        _work += "<a href='" + obj.src + "'>";
+                        _work += "<li class='col-xs-3'>";
+                        _work += "<img src='" + obj.cover + "'";
+                        _work += "alt='" + obj.title + "' width='292px height='410px'>";
+                        _work += "<p class='lead'>" + obj.title + "</p>";
+                        _work += "</li>";
+                        _work += "</a>";
+                    })
+                    $("#works").html(_work);
+                    $.each(data.stars, function (index, obj) {
+                        _star += "<a href='star/" + obj.id + "'>";
+                        _star += "<li class='col-xs-3'>";
+                        _star += "<img src='" + obj.avatar + "'";
+                        _star += "alt='" + obj.name + "' width='292px' height='410px'>";
+                        _star += "<p class='lead'>" + obj.name + "</p>";
+                        _star += "</li>";
+                        _star += "</a>";
+                    })
+                    $("#stars").html(_star);
+                }
+            })
         });
     </script>
     <!--百度新版统计代码-->
@@ -58,7 +86,7 @@
 <div class="top">
     <div class="container">
         <h1>
-            <a href="/"><img src="https://www.superbed.cn/pic/5c279bf6c4ff9e2b4e046001" alt="小戏骨俱乐部" height="59px"></a>
+            <a href="/"><img src="https://www.superbed.cn/pic/5c2c9cbe9dc6d672c31eda8d" alt="小戏骨俱乐部" height="59px"></a>
         </h1>
         <div class="top-menu">
             <a href="/" class="menu-home"><span>首页</span></a>
@@ -140,8 +168,8 @@
 <!--电视节目-->
 <h2 class="home-star-title">电视节目</h2>
 <div class="home-star-container">
-    <ul>
-        <a href="https://v.qq.com/detail/1/13wu89whib00rqd.html">
+    <ul id="works">
+        <!--<a href="https://v.qq.com/detail/1/13wu89whib00rqd.html">
             <li class="col-xs-3">
                 <img src="https://puui.qpic.cn/vcover_vt_pic/0/13wu89whib00rqd1506308541/0"
                      alt="小戏骨：红楼梦之刘姥姥进大观园" width="292px" height="410px">
@@ -196,7 +224,7 @@
                      alt="小戏骨：西游记之红孩儿" width="292px" height="410px">
                 <p class="lead">小戏骨：西游记之红孩儿</p>
             </li>
-        </a>
+        </a>-->
     </ul>
 </div>
 <div class="clearfix"></div>
@@ -206,8 +234,8 @@
 <!--小戏骨成员-->
 <h2 class="home-star-title">小戏骨成员</h2>
 <div class="home-star-container">
-    <ul>
-        <a href="star/699df5c443e741c2aa80a3e107fcacc6">
+    <ul id="stars">
+        <!--<a href="star/699df5c443e741c2aa80a3e107fcacc6">
             <li class="col-xs-3">
                 <img src="https://ae01.alicdn.com/kf/HTB1Enh1XyLrK1Rjy1zd761nnpXaI.png"
                      alt="周漾玥" width="292px" height="410px">
@@ -262,7 +290,7 @@
                      alt="肖杨博涵" width="292px" height="410px">
                 <p class="lead">肖杨博涵</p>
             </li>
-        </a>
+        </a>-->
     </ul>
 </div>
 <div class="clearfix"></div>
@@ -278,13 +306,13 @@
 <div class="foot">
     <div class="foot-icon-container">
         <a href="javascript:showWxWin()">
-            <span><img src="https://www.superbed.cn/pic/5c279d65c4ff9e2b4d699cd5"></span>
+            <span><img src="https://www.superbed.cn/pic/5c2c9bf59dc6d672c56b9a6a"></span>
         </a>
         <a href="javascript:showWeiboWin()">
-            <span><img src="https://www.superbed.cn/pic/5c279d88c4ff9e2b4d699cd6"></span>
+            <span><img src="https://www.superbed.cn/pic/5c2c9c309dc6d672c31eda8c"></span>
         </a>
         <a href="javascript:showEmailWin()">
-            <span><img src="https://www.superbed.cn/pic/5c279da2c4ff9e2b4e046007"></span>
+            <span><img src="https://www.superbed.cn/pic/5c2c9c569dc6d672c56b9a6b"></span>
         </a>
     </div>
     <div class="foot-right-container foot-right-menu">
@@ -295,15 +323,10 @@
         <a href="/feedback"><span>建议反馈</span></a>
     </div>
     <div>
-        版权所有 ©2018 王明亮 冀ICP备17033992号
+        版权所有 ©2018 王明亮 冀ICP备17033992号 | <img src="https://www.superbed.cn/pic/5c2c97629dc6d672c56b9a5a" alt="冀公网安备"/>
+        <a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13063102000043" target="_blank">冀公网安备13063102000043</a>
         <a href="https://tongji.baidu.com/web/welcome/ico?s=ad7e00b1748b755663693dd0229b2913">百度统计</a>
     </div>
-    <!--
-        <div>
-            版权所有 ©2018 王明亮 冀ICP备17033992号 | <img src="/images/jinghui.png" alt="冀公网安备"/>
-            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13063102000041">冀公网安备13063102000041</a>
-        </div>
-    -->
 </div>
 </body>
 </html>
